@@ -17,11 +17,13 @@ public class controller {
         Book book1 = new Book();
         book1.setAuthor("Arthur");
         book1.setTitle("Study in Red");
+        book1.setIsbn(123);
         books.add(book1);
 
         Book book2 = new Book();
         book2.setAuthor("Conan");
         book2.setTitle("Cau");
+        book2.setIsbn(456);
         books.add(book2);
 
         return books;
@@ -48,6 +50,11 @@ public class controller {
         return this.books.get(bookId);
     }
 
+    @GetMapping("/api/book/{bookIsbn}")
+    public Book getBookIsbn(@PathVariable Integer bookIsbn){
+        return this.books.get(bookIsbn);
+    }
+
     @PostMapping("/api/books")
     public Integer createBook(@RequestBody Book book){
         this.books.add(book);
@@ -61,9 +68,10 @@ public class controller {
     }
 
     @PutMapping("/api/books")
-    public void putBook(@PathVariable Integer bookId, @RequestBody Book book){
+    public void putBook(@PathVariable Integer bookId, @PathVariable Integer bookIsbn, @RequestBody Book book){
         this.books.get(bookId).setAuthor(book.getAuthor());
         this.books.get(bookId).setTitle(book.getTitle());
+        this.books.get(bookIsbn).setIsbn(book.getIsbn());
     }
 
 }
