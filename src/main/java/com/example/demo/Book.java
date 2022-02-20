@@ -3,7 +3,8 @@ package com.example.demo;
 public class Book {
     private String author;
     private String title;
-    private int isbn;
+    private String isbn;
+    private String id;
 
     public String getAuthor() {
         return author;
@@ -21,11 +22,19 @@ public class Book {
         this.title = title;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

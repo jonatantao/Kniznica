@@ -14,16 +14,19 @@ public class controller {
 
     public List<Book> init() {
         List<Book> books = new ArrayList<>();
+
         Book book1 = new Book();
-        book1.setAuthor("Arthur");
-        book1.setTitle("Study in Red");
-        book1.setIsbn(123);
+        book1.setAuthor("Haruki Murakami");
+        book1.setTitle("Norwegian Wood");
+        book1.setIsbn("0099448823");
+        book1.setId("1");
         books.add(book1);
 
         Book book2 = new Book();
         book2.setAuthor("Conan");
         book2.setTitle("Cau");
-        book2.setIsbn(456);
+        book2.setIsbn("456");
+        book2.setId("2");
         books.add(book2);
 
         return books;
@@ -50,9 +53,38 @@ public class controller {
         return this.books.get(bookId);
     }
 
-    @GetMapping("/api/book/{bookIsbn}")
-    public Book getBookIsbn(@PathVariable Integer bookIsbn){
-        return this.books.get(bookIsbn);
+    @GetMapping("/api/id")
+    public List<Book> getBookId(@RequestParam(required = false) String bookId){
+        if (bookId == null){
+            return this.books;
+        }
+
+        List<Book> filteredBooks = new ArrayList<>();
+
+        for (Book book : books){
+            if (book.getId().equals(bookId)){
+                filteredBooks.add(book);
+            }
+        }
+
+        return filteredBooks;
+    }
+
+    @GetMapping("/api/isbn")
+    public List<Book> getBookIsbn(@RequestParam(required = false) String bookIsbn){
+        if (bookIsbn == null){
+            return this.books;
+        }
+
+        List<Book> filteredBooks = new ArrayList<>();
+
+        for (Book book : books){
+            if (book.getIsbn().equals(bookIsbn)){
+                filteredBooks.add(book);
+            }
+        }
+
+        return filteredBooks;
     }
 
     @PostMapping("/api/books")
@@ -68,10 +100,11 @@ public class controller {
     }
 
     @PutMapping("/api/books")
-    public void putBook(@PathVariable Integer bookId, @PathVariable Integer bookIsbn, @RequestBody Book book){
+    public void putBook(@PathVariable Integer bookId, @RequestBody Book book){
+        this.books.get(bookId).setId(book.getId());
         this.books.get(bookId).setAuthor(book.getAuthor());
         this.books.get(bookId).setTitle(book.getTitle());
-        this.books.get(bookIsbn).setIsbn(book.getIsbn());
+        this.books.get(bookId).setIsbn(book.getIsbn());
     }
 
 }
