@@ -43,13 +43,14 @@ public class controller {
         user1.setFirstName("Jožo");
         user1.setLastName("Alvaréz");
         user1.setEmail("j.alvarez@gmail.com");
+        users.add(user1);
 
         User user2 = new User();
         user2.setId("2");
         user2.setFirstName("Jano");
         user2.setLastName("Odvedľa");
         user2.setEmail("odvedla@gmail.com");
-
+        users.add(user2);
         return users;
     }
 
@@ -161,6 +162,12 @@ public class controller {
         this.books.remove(this.books.get(bookId));
     }
 
+    @DeleteMapping("/api/users/{userId}")
+    public void deleteUser(@PathVariable Integer userId){
+        this.users.remove(this.users.get(userId));
+    }
+
+
     @PutMapping("/api/books/{bookId}") //update by {book}
     public List<Book> putBook(@PathVariable Integer bookId, @RequestBody Book book){
         this.books.get(bookId).setId(book.getId());
@@ -168,5 +175,14 @@ public class controller {
         this.books.get(bookId).setTitle(book.getTitle());
         this.books.get(bookId).setIsbn(book.getIsbn());
         return books;
+    }
+
+    @PutMapping("/api/users/{userId}")
+    public List<User> putUser(@PathVariable Integer userId, @RequestBody User user){
+        this.users.get(userId).setId(user.getId());
+        this.users.get(userId).setFirstName(user.getFirstName());
+        this.users.get(userId).setLastName(user.getLastName());
+        this.users.get(userId).setEmail(user.getEmail());
+        return users;
     }
 }
