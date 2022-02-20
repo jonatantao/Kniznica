@@ -88,10 +88,10 @@ public class controller {
     }
 
     @PostMapping("/api/books")
-    public Integer createBook(@RequestBody Book book){
+    public List<Book> createBook(@RequestBody Book book){
         this.books.add(book);
 
-        return this.books.size();
+        return books;
     }
 
     @DeleteMapping("/api/books/{bookId}")
