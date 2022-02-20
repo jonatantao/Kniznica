@@ -30,8 +30,9 @@ public class controller {
         books.add(book2);
 
         return books;
-    }
-    @GetMapping("/api/books")
+    } //init Book list
+
+    @GetMapping("/api/books") //search by bookAuthor
     public List<Book> getBooks(@RequestParam(required = false) String bookAuthor){
         if (bookAuthor == null){
             return this.books;
@@ -48,12 +49,12 @@ public class controller {
         return filteredBooks;
     }
 
-    @GetMapping("/api/book/{bookId}")
+    @GetMapping("/api/book/{bookId}") //search by {bookId}
     public Book getBook(@PathVariable Integer bookId){
         return this.books.get(bookId);
     }
 
-    @GetMapping("/api/id")
+    @GetMapping("/api/id") //search by bookId
     public List<Book> getBookId(@RequestParam(required = false) String bookId){
         if (bookId == null){
             return this.books;
@@ -70,7 +71,7 @@ public class controller {
         return filteredBooks;
     }
 
-    @GetMapping("/api/isbn")
+    @GetMapping("/api/isbn") //search by bookIsbn
     public List<Book> getBookIsbn(@RequestParam(required = false) String bookIsbn){
         if (bookIsbn == null){
             return this.books;
@@ -87,24 +88,23 @@ public class controller {
         return filteredBooks;
     }
 
-    @PostMapping("/api/books")
+    @PostMapping("/api/books") //create new book
     public List<Book> createBook(@RequestBody Book book){
         this.books.add(book);
-
         return books;
     }
 
-    @DeleteMapping("/api/books/{bookId}")
+    @DeleteMapping("/api/books/{bookId}") //delete book by {bookId}
     public void deleteBook(@PathVariable Integer bookId){
         this.books.remove(this.books.get(bookId));
     }
 
-    @PutMapping("/api/books")
-    public void putBook(@PathVariable Integer bookId, @RequestBody Book book){
+    @PutMapping("/api/books/{bookId}") //update by {book}
+    public List<Book> putBook(@PathVariable Integer bookId, @RequestBody Book book){
         this.books.get(bookId).setId(book.getId());
         this.books.get(bookId).setAuthor(book.getAuthor());
         this.books.get(bookId).setTitle(book.getTitle());
         this.books.get(bookId).setIsbn(book.getIsbn());
+        return books;
     }
-
 }
