@@ -9,10 +9,22 @@ import java.util.List;
 public class controller {
     List<Book> books;
     List<User> users;
+    List<Borrowings> borrowings;
 
     public controller(){
         this.books = init();
         this.users = init2();
+        this.borrowings = init3();
+    }
+
+    public List<Borrowings> init3(){
+        List<Borrowings> borrowing = new ArrayList<>();
+
+        Borrowings borrowings1 = new Borrowings();
+        borrowings1.setBorrowingId("1");
+        borrowing.add(borrowings1);
+
+        return borrowing;
     }
 
     public List<Book> init() {
@@ -22,14 +34,14 @@ public class controller {
         book1.setAuthor("Haruki Murakami");
         book1.setTitle("Norwegian Wood");
         book1.setIsbn("0099448823");
-        book1.setId("1");
+        book1.setBookId("1");
         books.add(book1);
 
         Book book2 = new Book();
         book2.setAuthor("Conan");
         book2.setTitle("Cau");
         book2.setIsbn("456");
-        book2.setId("2");
+        book2.setBookId("2");
         books.add(book2);
 
         return books;
@@ -144,6 +156,25 @@ public class controller {
         return filteredBooks;
     }
 
+    @GetMapping("/api/borrowings")
+    public List<Borrowings> getBorrowings(@RequestParam(required = false) String borrowingId){
+        if(borrowingId == null){
+            return this.borrowings;
+        }
+
+        List<Borrowings> filteredBorrowings = new ArrayList<>();
+
+        for (Borrowings borrowings : borrowings){
+            if(borrowings.getBorrowingId().equals(borrowingId)){
+                filteredBorrowings.add(borrowings);
+            }
+        }
+
+        return filteredBorrowings;
+    }
+
+
+
     @PostMapping("/api/books") //create new book
     public List<Book> createBook(@RequestBody Book book){
         this.books.add(book);
@@ -157,6 +188,13 @@ public class controller {
         return users;
     }
 
+    @PostMapping("api/borrowings")
+    public  List<Borrowings> createBorrowing(@RequestBody Borrowings borrowing){
+        this.borrowings.add(borrowing);
+
+        return borrowings;
+    }
+
     @DeleteMapping("/api/books/{bookId}")
     public void deleteBook(@PathVariable Integer bookId){
         this.books.remove(this.books.get(bookId));
@@ -165,6 +203,11 @@ public class controller {
     @DeleteMapping("/api/users/{userId}")
     public void deleteUser(@PathVariable Integer userId){
         this.users.remove(this.users.get(userId));
+    }
+
+    @DeleteMapping("/api/borrowings/{borrowingId}")
+    public void deleteBorrowing(@PathVariable Integer borrowingId){
+        this.borrowings.remove(this.borrowings.get(borrowingId));
     }
 
 
