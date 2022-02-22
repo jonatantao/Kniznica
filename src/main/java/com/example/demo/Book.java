@@ -1,6 +1,6 @@
 package com.example.demo;
 
-public class Book {
+public class Book extends Borrowings {
     private String author;
     private String title;
     private String isbn;
