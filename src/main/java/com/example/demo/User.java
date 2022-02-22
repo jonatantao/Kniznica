@@ -1,6 +1,6 @@
 package com.example.demo;
 
-public class User extends Borrowings {
+public class User {
 
     private String id;
     private String firstName;
