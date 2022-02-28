@@ -7,48 +7,27 @@ import java.util.List;
 
 @RestController
 public class controllerBorrowings {
-    List<Borrowings> borrowings;
 
-    public controllerBorrowings(){
-        this.borrowings = init3();
-    }
+    private List<Borrowings> borrowings;
 
-    public List<Borrowings> init3(){
-        List<Borrowings> borrowing = new ArrayList<>();
+    private BorrowingsService borrowingsService;
 
-        Borrowings borrowings1 = new Borrowings();
-        borrowings1.setBorrowingId("1");
-        borrowing.add(borrowings1);
-
-        return borrowing;
+    public controllerBorrowings(BorrowingsService borrowingsService){
+        this.borrowingsService = borrowingsService;
     }
 
     @GetMapping("/api/borrowings")
     public List<Borrowings> getBorrowings(@RequestParam(required = false) String borrowingId){
-        if(borrowingId == null){
-            return this.borrowings;
-        }
-
-        List<Borrowings> filteredBorrowings = new ArrayList<>();
-
-        for (Borrowings borrowings : borrowings){
-            if(borrowings.getBorrowingId().equals(borrowingId)){
-                filteredBorrowings.add(borrowings);
-            }
-        }
-
-        return filteredBorrowings;
+            return borrowingsService.getBorrowings(borrowingId);
     }
 
     @PostMapping("api/borrowings")
     public  List<Borrowings> createBorrowing(@RequestBody Borrowings borrowing){
-        this.borrowings.add(borrowing);
-
-        return borrowings;
+        return borrowingsService.createBorrowing(borrowing);
     }
 
     @DeleteMapping("/api/borrowings/{borrowingId}")
     public void deleteBorrowing(@PathVariable Integer borrowingId){
-        this.borrowings.remove(this.borrowings.get(borrowingId));
+        borrowingsService.deleteBorrowing(borrowingId);
     }
 }
