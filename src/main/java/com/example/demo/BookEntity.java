@@ -1,10 +1,26 @@
 package com.example.demo;
 
-public class Book  {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class BookEntity {
+    @Id
+    @GeneratedValue
+    private Long id;
     private String author;
     private String title;
     private String isbn;
-    private String id;
+    private String bookId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getAuthor() {
         return author;
@@ -30,11 +46,11 @@ public class Book  {
         this.isbn = isbn;
     }
 
-    public String getId() {
-        return id;
+    public String getBookId() {
+        return bookId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
 }
