@@ -26,17 +26,17 @@ public class UserController {
     }
 
     @PostMapping("/api/users") //creating new user
-    public List<UserDto> createUser(@RequestBody UserDto user){
+    public Long createUser(@RequestBody UserDto user){
         return userService.createUser(user);
     }
 
     @DeleteMapping("/api/users/{userId}")
-    public void deleteUser(@PathVariable Integer userId){
+    public void deleteUser(@PathVariable int userId){
         userService.deleteUser(userId);
     }
 
     @PutMapping("/api/users/{userId}")
-    public List<UserDto> putUser(@PathVariable Integer userId, @RequestBody UserDto user){
-        return userService.putUser(userId, user);
+    public void putUser(@PathVariable int userId, @RequestBody UserDto user){
+        userService.putUser(userId, user);
     }
 }

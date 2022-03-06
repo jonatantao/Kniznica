@@ -20,7 +20,7 @@ public class UserService {
 
         userDto.setFirstName(userEntity.getFirstName());
         userDto.setLastName(userEntity.getLastName());
-        userDto.setId(userEntity.getId());
+        userDto.setUserId(userEntity.getUserId());
         userDto.setEmail(userEntity.getEmail());
 
         return userDto;
@@ -52,7 +52,7 @@ public class UserService {
 
         userEntity.setFirstName(userDto.getFirstName());
         userEntity.setLastName(userDto.getLastName());
-        userEntity.setId(userDto.getId());
+        userEntity.setUserId(userDto.getUserId());
         userEntity.setEmail(userDto.getEmail());
 
         this.userRepository.save(userEntity);
@@ -74,7 +74,7 @@ public class UserService {
         if(byId.isPresent()){
             byId.get().setFirstName(userDto.getFirstName());
             byId.get().setLastName(userDto.getLastName());
-            byId.get().setId(userDto.getId());
+            byId.get().setUserId(userDto.getUserId());
             byId.get().setEmail(userDto.getEmail());
         }
     }

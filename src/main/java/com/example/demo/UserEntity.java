@@ -1,26 +1,32 @@
 package com.example.demo;
 
-import javax.persistance.Entity;
-import javax.persistance.GeneratedValue;
-import javax.persistance.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class UserEntity {
     @Id
     @GeneratedValue
     private long id;
-
     private String firstName;
-
     private String lastName;
-
     private String email;
+    private String userId;
 
-    public String getFirstName(){
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(){
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -40,11 +46,11 @@ public class UserEntity {
         this.email = email;
     }
 
-    public long getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
