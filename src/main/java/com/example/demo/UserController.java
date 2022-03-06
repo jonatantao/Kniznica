@@ -2,32 +2,31 @@ package com.example.demo;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class controllerUser {
+public class UserController {
 
-    private List<User> users;
+    private List<UserDto> users;
 
     private UserService userService;
 
-    public controllerUser(UserService userService){
+    public UserController(UserService userService){
         this.userService = userService;
     }
 
     @GetMapping("/api/users") //filtered users with user last name
-    public List<User> getUsers(@RequestParam(required = false) String userlastName){
+    public List<UserDto> getUsers(@RequestParam(required = false) String userlastName){
         return userService.getUsers(userlastName);
     }
 
     @GetMapping("/api/userid") //filtered users with user last name
-    public List<User> getUsersId(@RequestParam(required = false) String userId){
+    public List<UserDto> getUsersId(@RequestParam(required = false) String userId){
         return userService.getUsersId(userId);
     }
 
     @PostMapping("/api/users") //creating new user
-    public List<User> createUser(@RequestBody User user){
+    public List<UserDto> createUser(@RequestBody UserDto user){
         return userService.createUser(user);
     }
 
@@ -37,7 +36,7 @@ public class controllerUser {
     }
 
     @PutMapping("/api/users/{userId}")
-    public List<User> putUser(@PathVariable Integer userId, @RequestBody User user){
+    public List<UserDto> putUser(@PathVariable Integer userId, @RequestBody UserDto user){
         return userService.putUser(userId, user);
     }
 }

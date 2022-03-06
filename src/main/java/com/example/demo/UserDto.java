@@ -1,6 +1,6 @@
 package com.example.demo;
 
-public class User {
+public class UserDto {
 
     private String id;
     private String firstName;
@@ -38,7 +38,5 @@ public class User {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
 }
