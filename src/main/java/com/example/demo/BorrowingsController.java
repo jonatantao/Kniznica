@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class controllerBorrowings {
+public class BorrowingsController {
 
     private List<Borrowings> borrowings;
 
     private BorrowingsService borrowingsService;
 
-    public controllerBorrowings(BorrowingsService borrowingsService){
+    public BorrowingsController(BorrowingsService borrowingsService){
         this.borrowingsService = borrowingsService;
     }
 
